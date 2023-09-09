@@ -15,7 +15,7 @@
         id="bootstrap-stylesheet" />
     <link href="{{ asset('back/assets/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('back/assets/css/app.min.css') }}" rel="stylesheet" type="text/css" id="app-stylesheet" />
-
+    @yield('style')
 </head>
 
 <body>
@@ -27,41 +27,6 @@
         <!-- Topbar Start -->
         <div class="navbar-custom">
             <ul class="list-unstyled topnav-menu float-right mb-0">
-
-                <li class="dropdown d-none d-lg-block">
-                    <a class="nav-link dropdown-toggle mr-0" data-toggle="dropdown" href="#" role="button"
-                        aria-haspopup="false" aria-expanded="false">
-                        <img src="{{ asset('back/assets/images/flags/us.jpg') }}" alt="user-image" class="mr-2"
-                            height="12"> <span class="align-middle">English <i class="mdi mdi-chevron-down"></i>
-                        </span>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-right">
-                        <!-- item-->
-                        <a href="javascript:void(0);" class="dropdown-item notify-item">
-                            <img src="{{ asset('back/assets/images/flags/spain.jpg') }}" alt="user-image" class="mr-2"
-                                height="12"> <span class="align-middle">Spanish</span>
-                        </a>
-
-                        <!-- item-->
-                        <a href="javascript:void(0);" class="dropdown-item notify-item">
-                            <img src="{{ asset('back/assets/images/flags/italy.jpg') }}" alt="user-image" class="mr-2"
-                                height="12"> <span class="align-middle">Italian</span>
-                        </a>
-
-                        <!-- item-->
-                        <a href="javascript:void(0);" class="dropdown-item notify-item">
-                            <img src="{{ asset('back/assets/images/flags/french.jpg') }}" alt="user-image"
-                                class="mr-2" height="12"> <span class="align-middle">French</span>
-                        </a>
-
-                        <!-- item-->
-                        <a href="javascript:void(0);" class="dropdown-item notify-item">
-                            <img src="{{ asset('back/assets/images/flags/russia.jpg') }}" alt="user-image"
-                                class="mr-2" height="12"> <span class="align-middle">Russian</span>
-                        </a>
-                    </div>
-                </li>
-
                 <li class="dropdown notification-list">
                     <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
                         aria-haspopup="false" aria-expanded="false">
@@ -75,9 +40,9 @@
                             <h5 class="font-16 m-0">
                                 <span class="float-right">
                                     <a href="" class="text-dark">
-                                        <small>Clear All</small>
+                                        <small>Xóa tất cả</small>
                                     </a>
-                                </span>Notification
+                                </span>Thông báo
                             </h5>
                         </div>
 
@@ -127,7 +92,7 @@
                         <!-- All-->
                         <a href="javascript:void(0);"
                             class="dropdown-item text-primary text-center notify-item notify-all ">
-                            View all
+                            Xem hết
                             <i class="fi-arrow-right"></i>
                         </a>
 
@@ -140,50 +105,43 @@
                         <img src="{{ asset('back/assets/images/users/avatar-1.jpg') }}" alt="user-image"
                             class="rounded-circle">
                         <span class="pro-user-name ml-1">
-                            Maxine K <i class="mdi mdi-chevron-down"></i>
+                            {{ Str::ucfirst($user['name']) }} <i class="mdi mdi-chevron-down"></i>
                         </span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
                         <!-- item-->
                         <div class="dropdown-header noti-title">
-                            <h6 class="text-overflow m-0">Welcome !</h6>
+                            <h6 class="text-overflow m-0">{{$user['greating']}}</h6>
                         </div>
 
                         <!-- item-->
-                        <a href="javascript:void(0);" class="dropdown-item notify-item">
+                        <a href="{{route('profile')}}" class="dropdown-item notify-item">
                             <i class="mdi mdi-account-outline"></i>
-                            <span>Profile</span>
+                            <span>Hồ sơ</span>
                         </a>
 
                         <!-- item-->
-                        <a href="javascript:void(0);" class="dropdown-item notify-item">
+                        <a href="{{route('profile', ['tab' => 'edit'])}}" class="dropdown-item notify-item">
                             <i class="mdi mdi-settings-outline"></i>
-                            <span>Settings</span>
+                            <span>Thiết lập</span>
                         </a>
 
                         <!-- item-->
-                        <a href="javascript:void(0);" class="dropdown-item notify-item">
+                        {{-- <a href="javascript:void(0);" class="dropdown-item notify-item">
                             <i class="mdi mdi-lock-outline"></i>
                             <span>Lock Screen</span>
-                        </a>
+                        </a> --}}
 
                         <div class="dropdown-divider"></div>
 
                         <!-- item-->
-                        <a href="javascript:void(0);" class="dropdown-item notify-item">
+                        <a href="{{route('logout')}}" class="dropdown-item notify-item">
                             <i class="mdi mdi-logout-variant"></i>
-                            <span>Logout</span>
+                            <span>Đăng Xuất</span>
                         </a>
 
                     </div>
                 </li>
-
-                <li class="dropdown notification-list">
-                    <a href="javascript:void(0);" class="nav-link right-bar-toggle">
-                        <i class="mdi mdi-settings-outline noti-icon"></i>
-                    </a>
-                </li>
-
 
             </ul>
 
@@ -223,7 +181,7 @@
                     <form class="app-search">
                         <div class="app-search-box">
                             <div class="input-group">
-                                <input type="text" class="form-control" placeholder="Search...">
+                                <input type="text" class="form-control" placeholder="Tìm kiếm...">
                                 <div class="input-group-append">
                                     <button class="btn" type="submit">
                                         <i class="fas fa-search"></i>
@@ -245,7 +203,7 @@
                         class="avatar-md rounded-circle">
                 </div>
                 <div class="user-info">
-                    <a href="#">Stanley Jones</a>
+                    <a href="{{route('profile')}}">{{ Str::ucfirst($user['name']) }}</a>
                     <p class="text-muted m-0">Administrator</p>
                 </div>
             </div>
@@ -258,11 +216,36 @@
                     <li class="menu-title">Navigation</li>
 
                     <li>
-                        <a href="index.html">
+                        <a href="{{route('dashboard')}}">
                             <i class="ti-home"></i>
-                            <span> Dashboard </span>
+                            <span> Bảng điều khiển </span>
                         </a>
                     </li>
+
+                    <li>
+                        <a href="javascript: void(0);">
+                            <i class="ti-light-bulb"></i>
+                            <span> Category </span>
+                            <span class="menu-arrow"></span>
+                        </a>
+                        <ul class="nav-second-level" aria-expanded="false">
+                            <li><a href="{{route('category.add')}}">Thêm mới</a></li>
+                            <li><a href="{{route('category.list')}}">Quản lý</a></li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a href="javascript: void(0);">
+                            <i class="ti-light-bulb"></i>
+                            <span> Sản phẩm </span>
+                            <span class="menu-arrow"></span>
+                        </a>
+                        <ul class="nav-second-level" aria-expanded="false">
+                            <li><a href="{{route('product.add')}}">Thêm mới</a></li>
+                            <li><a href="components-alerts.html">Quản lý</a></li>
+                        </ul>
+                    </li>
+                    
 
                     <li>
                         <a href="ui-elements.html">
@@ -423,7 +406,20 @@
         <!-- ============================================================== -->
 
         <div class="content-page">
-            @yield('content')
+            <div class="content">
+                @yield('content')
+                <!-- Footer Start -->
+                <footer class="footer">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-12">
+                                2017 - 2020 &copy; Simple theme by <a href="">Coderthemes</a>
+                            </div>
+                        </div>
+                    </div>
+                </footer>
+                <!-- end Footer -->
+            </div>
             <!-- end content -->
 
         </div>
@@ -431,66 +427,6 @@
 
     </div>
     <!-- END wrapper -->
-
-
-    <!-- Right Sidebar -->
-    <div class="right-bar">
-        <div class="rightbar-title">
-            <a href="javascript:void(0);" class="right-bar-toggle float-right">
-                <i class="mdi mdi-close"></i>
-            </a>
-            <h5 class="font-16 m-0 text-white">Theme Customizer</h5>
-        </div>
-        <div class="slimscroll-menu">
-
-            <div class="p-4">
-                <div class="alert alert-warning" role="alert">
-                    <strong>Customize </strong> the overall color scheme, layout, etc.
-                </div>
-                <div class="mb-2">
-                    <img src="{{ asset('back/assets/images/layouts/light.png') }}" class="img-fluid img-thumbnail"
-                        alt="">
-                </div>
-                <div class="custom-control custom-switch mb-3">
-                    <input type="checkbox" class="custom-control-input theme-choice" id="light-mode-switch"
-                        checked />
-                    <label class="custom-control-label" for="light-mode-switch">Light Mode</label>
-                </div>
-
-                <div class="mb-2">
-                    <img src="{{ asset('back/assets/images/layouts/dark.png') }}" class="img-fluid img-thumbnail"
-                        alt="">
-                </div>
-                <div class="custom-control custom-switch mb-3">
-                    <input type="checkbox" class="custom-control-input theme-choice" id="dark-mode-switch"
-                        data-bsStyle="assets/css/bootstrap-dark.min.css"
-                        data-appStyle="assets/css/app-dark.min.css" />
-                    <label class="custom-control-label" for="dark-mode-switch">Dark Mode</label>
-                </div>
-
-                <div class="mb-2">
-                    <img src="{{ asset('back/assets/images/layouts/rtl.png') }}" class="img-fluid img-thumbnail"
-                        alt="">
-                </div>
-                <div class="custom-control custom-switch mb-5">
-                    <input type="checkbox" class="custom-control-input theme-choice" id="rtl-mode-switch"
-                        data-appStyle="assets/css/app-rtl.min.css" />
-                    <label class="custom-control-label" for="rtl-mode-switch">RTL Mode</label>
-                </div>
-
-                <a href="https://1.envato.market/EK71X" class="btn btn-danger btn-block mt-3" target="_blank"><i
-                        class="mdi mdi-download mr-1"></i> Download Now</a>
-            </div>
-        </div> <!-- end slimscroll-menu-->
-    </div>
-    <!-- /Right-bar -->
-
-    <!-- Right bar overlay-->
-    <div class="rightbar-overlay"></div>
-
-    <a href="javascript:void(0);" class="right-bar-toggle demos-show-btn">
-        <i class="mdi mdi-settings-outline mdi-spin"></i> &nbsp;Choose Demos
-    </a>
 
     <!-- Vendor js -->
     <script src="{{ asset('back/assets/js/vendor.min.js') }}"></script>
@@ -502,6 +438,8 @@
 
     <!-- App js -->
     <script src="{{ asset('back/assets/js/app.min.js') }}"></script>
+
+    @yield('javascript')
 
 </body>
 

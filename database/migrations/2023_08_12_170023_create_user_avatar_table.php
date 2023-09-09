@@ -11,9 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('table_product_types', function (Blueprint $table) {
+        Schema::create('user_avatar', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->integer('user_id');
+            $table->string('avatar_path')->nullable();
+            $table->boolean('active')->default(true);
             $table->timestamps();
         });
     }
@@ -23,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('table_product_types');
+        Schema::dropIfExists('user_avatar');
     }
 };

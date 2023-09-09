@@ -11,10 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('product_images', function (Blueprint $table) {
+        Schema::create('user_socials', function (Blueprint $table) {
             $table->id();
-            $table->integer('product_id');
-            $table->string('path');
+            $table->integer('user_id');
+            $table->enum('type', ['fb', 'zalo', 'instagram'])->nullable()->default(null);
+            $table->string('path', 200)->nullable();
             $table->timestamps();
         });
     }
@@ -24,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('product_images');
+        Schema::dropIfExists('user_socials');
     }
 };
